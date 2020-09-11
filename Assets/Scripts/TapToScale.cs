@@ -10,7 +10,6 @@ public class TapToScale : BasedObject
 
     float scaleX;
     float scaleY;
-    float scaleZ; 
 
     float minScale;
     float maxScale;
@@ -39,7 +38,6 @@ public class TapToScale : BasedObject
             {
                 scaleX += scaleRt;
                 scaleY += scaleRt;
-                scaleZ += scaleRt;
             }
         }
         else
@@ -49,7 +47,6 @@ public class TapToScale : BasedObject
             {
                scaleX -= scaleRt*3;
                scaleY -= scaleRt*3;
-               scaleZ -= scaleRt*3;
             }
         }
     }
@@ -58,9 +55,21 @@ public class TapToScale : BasedObject
     {
         scaleX = Mathf.Clamp(scaleX, minScale,maxScale);
         scaleY = Mathf.Clamp(scaleY, minScale,maxScale);
-        scaleZ = Mathf.Clamp(scaleZ, minScale,maxScale);
 
-        transform.localScale = new Vector3(scaleX,scaleY,scaleZ);
+        transform.localScale = new Vector3(scaleX,scaleY,transform.localScale.z);
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.CompareTag("MinAndMaxData"))
+        {
+            MinAndMaxData minAndMaxData= other.GetComponent<MinAndMaxData>();
+
+            minScale = minAndMaxData.minScaleData;
+            maxScale = minAndMaxData.maxScaleData;
+
+            Debug.Log(minScale +" "+ maxScale);
+        }
     }
 
 }
