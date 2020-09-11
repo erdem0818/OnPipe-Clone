@@ -34,5 +34,12 @@ public class PlayerMove : BasedObject
             states = States.stopped;
             Debug.Log("durdu");
         }
+        else if(other.CompareTag("Grain"))
+        {   
+            Vector3 forceDirection = new Vector3(0f,1f,10f);
+            Rigidbody rb = other.GetComponent<Rigidbody>();
+            rb.AddExplosionForce(10f,forceDirection,10f,10f,ForceMode.Impulse);
+            rb.useGravity= true;     
+        }
     }
 }
