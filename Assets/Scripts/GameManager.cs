@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Base;
 
-public class GameManager : BasedObject
+public class GameManager : MonoBehaviour
 {
     [SerializeField]
     BasedObject[] _basedObjects;
