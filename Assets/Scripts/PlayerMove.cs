@@ -9,11 +9,18 @@ public enum States
 }
 public class PlayerMove : BasedObject
 {   
-    [SerializeField]
-    States states;
+   
+    public States states;
 
     [SerializeField]
     private float _speed;
+
+    
+    Vector3 rayOrigin;
+    [SerializeField]
+    private float maxDistance;
+    [SerializeField]
+    private LayerMask layerMask;
 
     public override void BaseObjectStart()
     {
@@ -25,21 +32,31 @@ public class PlayerMove : BasedObject
         {
             transform.Translate(Vector3.forward * Time.fixedDeltaTime * _speed);
         }
+        
+        rayHit();
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void rayHit()
     {
-        if(other.CompareTag("Cylinder"))
+        rayOrigin = new Vector3(transform.position.x,transform.position.y+0.5f,transform.position.z);
+
+        RaycastHit hitInfo;
+
+        if(Physics.Raycast(rayOrigin,Vector3.forward,out hitInfo,maxDistance,layerMask))
         {
             states = States.stopped;
             Debug.Log("durdu");
         }
-        else if(other.CompareTag("Grain"))
-        {   
-            Vector3 forceDirection = new Vector3(0f,1f,10f);
+    }
+    private void OnTriggerEnter(Collider other)
+    {
+        
+        if(other.CompareTag("Grain"))
+        {
+            Vector3 forceDirection = new Vector3(0f,5f,-2f);
             Rigidbody rb = other.GetComponent<Rigidbody>();
-            rb.AddExplosionForce(10f,forceDirection,10f,10f,ForceMode.Impulse);
-            rb.useGravity= true;     
+            rb.AddForceAtPosition(forceDirection,other.transform.position,ForceMode.Impulse);
+            rb.useGravity= true;  
         }
     }
 }

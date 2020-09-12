@@ -4,7 +4,9 @@ using UnityEngine;
 using Base;
 
 public class TapToScale : BasedObject
-{
+{    
+    [SerializeField]
+    PlayerMove player;
     [SerializeField]
     private float _scaleRatio;
 
@@ -20,12 +22,15 @@ public class TapToScale : BasedObject
     public override void BaseObjectStart()
     {
         minScale = 0.6f;
-        maxScale = 1f;
+        maxScale = 1.25f;
     }
     public override void BaseObjectFixedUpdate()
     {
    
-        ScaleObject(_scaleRatio);
+       if(player.states == States.moving)
+       {
+            ScaleObject(_scaleRatio);
+       }
         ChangeScaleMinAndMax();       
     }
 
@@ -67,8 +72,6 @@ public class TapToScale : BasedObject
 
             minScale = minAndMaxData.minScaleData;
             maxScale = minAndMaxData.maxScaleData;
-
-            Debug.Log(minScale +" "+ maxScale);
         }
     }
 
