@@ -14,9 +14,9 @@ public class PlayerMove : BasedObject
 
     [SerializeField]
     private float _speed;
-
     
-    Vector3 rayOrigin;
+    [SerializeField]
+    private Transform _rayOrigin;
     [SerializeField]
     private float maxDistance;
     [SerializeField]
@@ -38,14 +38,11 @@ public class PlayerMove : BasedObject
 
     private void rayHit()
     {
-        rayOrigin = new Vector3(transform.position.x,transform.position.y+0.5f,transform.position.z);
-
         RaycastHit hitInfo;
 
-        if(Physics.Raycast(rayOrigin,Vector3.forward,out hitInfo,maxDistance,layerMask))
+        if(Physics.Raycast(_rayOrigin.position,Vector3.forward,out hitInfo,maxDistance,layerMask))
         {
             states = States.stopped;
-            Debug.Log("durdu");
         }
     }
     private void OnTriggerEnter(Collider other)
