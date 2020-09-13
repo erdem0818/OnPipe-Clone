@@ -15,12 +15,12 @@ public class GrainGenerator : BasedObject
 
     private void OnEnable()
     {
-        _grainPos = new Vector3(transform.position.x,grainYpos,(transform.position.z - 0.75f));
+        _grainPos = new Vector3(transform.position.x,grainYpos,(transform.position.z - 1f));
         generetaGrains();
     }
     public void generetaGrains()
     {
-        int randomQueue = Random.Range(5,10);
+        int randomQueue = Random.Range(7,12);
         for(int i=0; i<randomQueue; i++)
         {
             GameObject grainsClone = Instantiate(_grains,_grainPos,_grains.transform.rotation);

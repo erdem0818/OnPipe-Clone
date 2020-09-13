@@ -5,7 +5,8 @@ using Base;
 
 public class LevelGenerator : BasedObject
 {
-
+   [SerializeField]
+   private GameObject _finishCylinder;
    [SerializeField]
    private GameObject[] _cylinders;
 
@@ -20,5 +21,8 @@ public class LevelGenerator : BasedObject
 
             startPos += new Vector3(0f,0f,4f);
         }
+        
+        Vector3 finisPos = new Vector3(0f,0f,4f) + startPos;
+        GameObject cloneFinish = Instantiate(_finishCylinder,finisPos,_finishCylinder.transform.rotation);
     }
 }
