@@ -67,7 +67,8 @@ public class PlayerMove : BasedObject
         }
         else if(other.CompareTag("Cylinder"))
         {
-            states = States.stopped;      
+            states = States.stopped;   
+            _sceneManager.GameOver();   
         }
         else if(other.CompareTag("Finish"))
         {
