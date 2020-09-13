@@ -73,7 +73,7 @@ GameObject:
   - component: {fileID: 9093599083527650437}
   m_Layer: 8
   m_Name: CylinderSmall
-  m_TagString: Cylinder
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 4294967295

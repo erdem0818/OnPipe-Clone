@@ -55,5 +55,10 @@ public class PlayerMove : BasedObject
             rb.AddForceAtPosition(forceDirection,other.transform.position,ForceMode.Impulse);
             rb.useGravity= true;  
         }
+        else if(other.CompareTag("Cylinder"))
+        {
+            states = States.stopped;
+            Debug.Log("yandın");
+        }
     }
 }

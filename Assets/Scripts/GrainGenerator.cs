@@ -15,7 +15,7 @@ public class GrainGenerator : BasedObject
 
     private void OnEnable()
     {
-        _grainPos = new Vector3(transform.position.x,grainYpos,(transform.position.z - 0.5f));
+        _grainPos = new Vector3(transform.position.x,grainYpos,(transform.position.z - 0.75f));
         generetaGrains();
     }
     public void generetaGrains()
