@@ -10,11 +10,6 @@ public class sceneManager : BasedObject
     [SerializeField]
     private GameObject restartButton;
 
-    public override void BaseObjectStart()
-    {
-        restartButton.SetActive(false);
-        onGameOver += slideRestartButton;
-    }
     public event UnityAction onGameOver;
     public void GameOver()
     {
@@ -23,6 +18,18 @@ public class sceneManager : BasedObject
             onGameOver();
         }
     }
+
+    public override void BaseObjectStart()
+    {
+        restartButton.SetActive(false);
+        onGameOver += slideRestartButton;
+    }
+
+    public override void BaseObjectOnDestroy()
+    {
+        onGameOver -= slideRestartButton;
+    }
+
     
     private void slideRestartButton()
     {

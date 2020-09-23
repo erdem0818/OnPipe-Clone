@@ -41,6 +41,10 @@ public class CameraFollow : BasedObject
             transform.position = followVector;
         }
     }
+    public override void BaseObjectOnDestroy()
+    {
+        OnFinishTriggerEnter -=StopCameraFollow;
+    }
 
     private void StopCameraFollow()
     {

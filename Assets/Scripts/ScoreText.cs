@@ -17,6 +17,10 @@ public class ScoreText : BasedObject
         _score=0;
         OnChangeScoreText += increaseScore;
     }
+    public override void BaseObjectOnDestroy()
+    {
+        OnChangeScoreText -= increaseScore;
+    }
     public event UnityAction OnChangeScoreText;
     public void scoreChanged()
     {
