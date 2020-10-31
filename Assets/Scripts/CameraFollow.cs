@@ -1,8 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.Events;
+using System;
 using Base;
 
 public enum Cam
@@ -21,7 +20,7 @@ public class CameraFollow : BasedObject
     private Vector3 _offset;
     
 
-    public event UnityAction OnFinishTriggerEnter;
+    public event Action finishTriggerEnter;
 
     public override void BaseObjectStart()
     {
@@ -29,7 +28,7 @@ public class CameraFollow : BasedObject
    
         cam = Cam.follow;
 
-        OnFinishTriggerEnter +=StopCameraFollow;
+        finishTriggerEnter +=StopCameraFollow;
     }
 
     public override void BaseObjectFixedUpdate()
@@ -43,7 +42,7 @@ public class CameraFollow : BasedObject
     }
     public override void BaseObjectOnDestroy()
     {
-        OnFinishTriggerEnter -=StopCameraFollow;
+        finishTriggerEnter -=StopCameraFollow;
     }
 
     private void StopCameraFollow()
@@ -51,11 +50,11 @@ public class CameraFollow : BasedObject
         cam = Cam.notFollow;
     }
     
-    public void FinishTriggerEnter()
+    public void onFinishTriggerEnter()
     {
-        if(OnFinishTriggerEnter != null)
+        if(finishTriggerEnter != null)
         {
-            OnFinishTriggerEnter();
+            finishTriggerEnter();
         }
     }
 }
