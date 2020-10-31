@@ -72,7 +72,7 @@ public class PlayerMove : BasedObject
         }
         else if(other.CompareTag("Finish"))
         {
-            cameraFollow.FinishTriggerEnter();
+            cameraFollow.onFinishTriggerEnter();
             _sceneManager.GameOver();
         }
     }
